@@ -28,7 +28,7 @@ function App() {
     console.log("Enviando archivo:", file.name, filtro, variante);
 
     try {
-      const res = await fetch("http://127.0.0.1:8000/procesar", {
+      const res = await fetch("https://laplacerobertssobel.onrender.com/procesar", {
         method: "POST",
         body: formData,
       });
