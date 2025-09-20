@@ -1,0 +1,42 @@
+body{
+    display: flex;
+    justify-content: center;
+}
+p{
+    color:rgb(42, 73, 53);
+    text-shadow:
+    0 0 2px #a4e7b6,
+    0 0 5px #a4e7b6,
+    0 0 10px #3e754b,
+    0 0 20px #3e754b;
+}
+pre{
+    display: flex;
+    justify-content: center;
+    color:rgb(42, 73, 53);
+    text-shadow:
+    0 0 2px #a4e7b6,
+    0 0 5px #a4e7b6,
+    0 0 10px #3e754b,
+    0 0 20px #3e754b;
+}
+
+#exp {
+  background-color: rgba(0, 0, 0, 0.6); /* Fondo negro semi-transparente */
+  color: rgb(255, 255, 255); /* Texto en blanco para mejor contraste */
+  padding: 1rem; /* Espaciado interno */
+  border-radius: 5px; /* Bordes redondeados */
+  max-width: 500px; /* Tamaño máximo para que no se extienda demasiado */
+  margin: 1rem auto; /* Centrar horizontalmente */
+  text-align: center; /* Centrar el texto */
+  font-size: 1rem; /* Tamaño de texto legible */
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3); /* Sombra para darle profundidad */
+}
+
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
