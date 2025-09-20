@@ -6,21 +6,34 @@ function ImageCompareSlider({ beforeSrc, afterSrc }) {
   const [sliderX, setSliderX] = useState(50);
   const [isDragging, setIsDragging] = useState(false);
 
-  const updateSlider = (e) => {
-    if (!isDragging) return;
+  const moveSlider = (clientX) => {
     const rect = containerRef.current.getBoundingClientRect();
-    const x = e.clientX - rect.left;
+    const x = clientX - rect.left;
     const percent = Math.max(0, Math.min(100, (x / rect.width) * 100));
     setSliderX(percent);
+  };
+
+  const handleMouseDown = () => setIsDragging(true);
+  const handleMouseUp = () => setIsDragging(false);
+  const handleMouseMove = (e) => {
+    if (isDragging) moveSlider(e.clientX);
+  };
+
+  const handleTouchStart = (e) => {
+    if (e.touches.length > 0) moveSlider(e.touches[0].clientX);
+  };
+  const handleTouchMove = (e) => {
+    if (e.touches.length > 0) moveSlider(e.touches[0].clientX);
   };
 
   return (
     <div
       className="compare-container"
       ref={containerRef}
-      onMouseMove={updateSlider}
-      onMouseUp={() => setIsDragging(false)}
-      onMouseLeave={() => setIsDragging(false)}
+      onMouseMove={handleMouseMove}
+      onMouseUp={handleMouseUp}
+      onMouseLeave={handleMouseUp}
+      onTouchMove={handleTouchMove}
     >
       <img src={beforeSrc} alt="Antes" className="img-before" />
       <img
@@ -29,15 +42,16 @@ function ImageCompareSlider({ beforeSrc, afterSrc }) {
         className="img-after"
         style={{ clipPath: `inset(0 ${100 - sliderX}% 0 0)` }}
       />
-
-      {/* Barra que se puede arrastrar */}
+      {/* Barra que se arrastra */}
       <div
         className="slider-bar"
         style={{ left: `${sliderX}%` }}
-        onMouseDown={() => setIsDragging(true)}
+        onMouseDown={handleMouseDown}
+        onTouchStart={handleTouchStart}
       />
     </div>
   );
 }
 
 export default ImageCompareSlider;
+
